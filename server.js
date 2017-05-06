@@ -5,11 +5,11 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 var PORT = process.env.PORT || 3000;
-var todoNestId = 5;
+var todoNestId = 1;
 
 app.use(bodyParser.json());
-
-var todos = [{
+var todos = [];
+/*var todos = [{
     id: 1,
     description: 'Meet Alex for lunch!',
     completed: false
@@ -21,7 +21,7 @@ var todos = [{
     id: 3,
     description: 'Get the car from the dealer',
     completed: true
-}];
+}];*/
 
 app.get('/', function (req, res) {
     res.send('Todo API Root');
