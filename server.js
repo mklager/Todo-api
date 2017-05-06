@@ -2,11 +2,16 @@
  * Created by mlagusker on 5/3/17.
  */
 var express = require('express');
+var bodyParser = require('body-parser');
 var app = express();
 var PORT = process.env.PORT || 3000;
+var todoNestId = 5;
+
+app.use(bodyParser.json());
+
 var todos = [{
     id: 1,
-    description: 'Meet Alex for lunch',
+    description: 'Meet Alex for lunch!',
     completed: false
 }, {
     id: 2,
@@ -40,6 +45,14 @@ app.get('/todos/:id', function (req, res) {
     } else {
         res.status(404).send();
     }
+});
+
+app.post('/todos', function (req, res) {
+    var body = req.body;
+    body.id = todoNestId;
+    todos.push(body);
+    res.json(body);
+    todoNestId++;
 });
 
 app.listen(PORT, function () {
