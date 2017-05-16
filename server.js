@@ -47,13 +47,6 @@ app.get('/todos/:id', function (req, res) {
     }, function () {
         res.status(500).send()
     });
-    /*    var matchedTodo = _.findWhere(todos, {id: todoId});
-
-     if (matchedTodo) {
-     res.json(matchedTodo);
-     } else {
-     res.status(404).send();
-     }*/
 });
 
 app.post('/todos', function (req, res) {
@@ -65,13 +58,6 @@ app.post('/todos', function (req, res) {
     }).catch(function (e) {
         return res.status(400).json(e);
     });
-    /*    if (!_.isBoolean(body.completed) || !_.isString(body.description) || body.description.length === 0) {
-     return res.status(400).send();
-     }
-
-     body.id = todoNestId++;
-     todos.push(body);
-     res.json(body);*/
 });
 
 app.delete('/todos/:id', function (req, res) {
