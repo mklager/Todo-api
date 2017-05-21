@@ -8,10 +8,10 @@ var db = require('./db.js');
 
 var app = express();
 var PORT = process.env.PORT || 3000;
-var todoNestId = 1;
+//var todoNestId = 1;
 
 app.use(bodyParser.json());
-var todos = [];
+//var todos = [];
 
 app.get('/', function (req, res) {
     res.send('Todo API Root');
@@ -53,16 +53,6 @@ app.get('/todos/:id', function (req, res) {
     });
 });
 
-app.post('/todos', function (req, res) {
-    var body = _.pick(req.body, 'description', 'completed');
-    body.description = body.description.trim();
-
-    db.todo.create(body).then(function (todo) {
-        return res.json(todo.toJSON());
-    }).catch(function (e) {
-        return res.status(400).json(e);
-    });
-});
 
 app.delete('/todos/:id', function (req, res) {
 
@@ -113,6 +103,28 @@ app.put('/todos/:id', function (req, res) {
     });
 
 });
+
+app.post('/todos', function (req, res) {
+    var body = _.pick(req.body, 'description', 'completed');
+    body.description = body.description.trim();
+
+    db.todo.create(body).then(function (todo) {
+        return res.json(todo.toJSON());
+    }).catch(function (e) {
+        return res.status(400).json(e);
+    });
+});
+
+app.post('/users', function (req, res) {
+    var body = _.pick(req.body, 'email', 'password');
+
+    db.user.create(body).then(function (user) {
+        res.json(user.toJSON());
+    }, function (e) {
+        res.status(400).json(e);
+    });
+});
+
 
 db.sequelize.sync().then(function () {
     app.listen(PORT, function () {
